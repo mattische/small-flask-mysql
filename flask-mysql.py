@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import mysql.connector
-from flask import request
+
 
 
 app = Flask(__name__)
