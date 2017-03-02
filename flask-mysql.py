@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request
 import mysql.connector
 
-
 app = Flask(__name__)
-
 
 def db():
     con = mysql.connector.connect(user='dbuser', password='password123', host='194.47.143.131',
@@ -46,7 +44,6 @@ def empPost():
 
     cursor.execute("UPDATE employees SET firstName='"+request.form['e_fname']+"', lastName='"+\
                    request.form['e_lname']+"' WHERE employeeNumber=" + request.form['e_nbr'])
-
 
     cursor.close()
     con.commit()
