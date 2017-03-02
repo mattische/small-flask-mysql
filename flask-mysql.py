@@ -38,7 +38,7 @@ def employee(empNbr):
 
 
 @app.route('/update_employee', methods=['POST'])
-def addRegion():
+def empPost():
     print("update employee...")
     e = (request.form['e_nbr'], request.form['e_fname'], request.form['e_lname'], True)
     return render_template("employee.html", employee=e)
