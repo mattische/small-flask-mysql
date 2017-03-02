@@ -39,8 +39,18 @@ def employee(empNbr):
 
 @app.route('/update_employee', methods=['POST'])
 def empPost():
-    print("update employee...")
+    print("update employee..." + request.form['e_nbr'])
     e = (request.form['e_nbr'], request.form['e_fname'], request.form['e_lname'], True)
+    con = db()
+    cursor = con.cursor()
+
+    cursor.execute("UPDATE employees SET firstName='"+request.form['e_fname']+"', lastName='"+\
+                   request.form['e_lname']+"' WHERE employeeNumber=" + request.form['e_nbr'])
+
+
+    cursor.close()
+    con.commit()
+    con.close()
     return render_template("employee.html", employee=e)
 
 if __name__ == '__main__':
