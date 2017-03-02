@@ -2,8 +2,13 @@ from flask import Flask, render_template, request
 import mysql.connector
 
 
-
 app = Flask(__name__)
+
+
+def db():
+    con = mysql.connector.connect(user='dbuser', password='password123', host='194.47.143.131',
+                                  database='classicmodels')
+    return con
 
 @app.route("/help")
 def help():
@@ -11,8 +16,7 @@ def help():
 
 @app.route('/')
 def hello_world():
-    con = mysql.connector.connect(user='dbuser', password='password123', host='194.47.143.131',
-                                  database='classicmodels')
+    con = db()
     cursor = con.cursor()
     cursor.execute("SELECT employeeNumber, firstName, lastName FROM employees")
     res = cursor.fetchall()
@@ -23,8 +27,7 @@ def hello_world():
 
 @app.route('/employee/<empNbr>')
 def employee(empNbr):
-    con = mysql.connector.connect(user='dbuser', password='password123', host='194.47.143.131',
-                                  database='classicmodels')
+    con = db()
     cursor = con.cursor()
 
     cursor.execute("SELECT employeeNumber, firstName, lastName FROM employees WHERE employeeNumber="+empNbr)
